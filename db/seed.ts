@@ -4,12 +4,12 @@ import { Clients, db } from 'astro:db';
 export default async function seed() {
 
   await db.insert(Clients).values([
-    { id: 1, name: 'John', age: 30, isActive: true },
-    { id: 2, name: 'Jane', age: 25, isActive: false },
-    { id: 3, name: 'Bob', age: 40, isActive: true },
-    { id: 4, name: 'Alice', age: 35, isActive: true },
-    { id: 5, name: 'Charlie', age: 45, isActive: false },
-    { id: 6, name: 'Eve', age: 30, isActive: true },
+    { name: 'John', age: 30, isActive: true },
+    { name: 'Jane', age: 25, isActive: false },
+    { name: 'Bob', age: 40, isActive: true },
+    { name: 'Alice', age: 35, isActive: true },
+    { name: 'Charlie', age: 45, isActive: false },
+    { name: 'Eve', age: 30, isActive: true },
 
   ]);
 
@@ -18,3 +18,6 @@ export default async function seed() {
 
   console.log("Seed ejecutado");
 }
+
+// para plantar el seed en la base de datos remota
+// npx astro db execute db/seed.ts --remote

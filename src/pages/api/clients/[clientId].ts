@@ -10,35 +10,29 @@ export const GET: APIRoute = async ({ params, request }) => {
 
   const clientId = params.clientId ?? '';
 
-  try {
 
-    const { id, ...body } = await request.json();
+  const client = await db.select().from(Clients).where(eq(Clients.id, +clientId));
 
-    const results = await db.update(Clients).set(body)
-      .where(eq(Clients.id, +clientId));
+  if (client.length === 0) {
 
-
-    const updatedClient = await db.select().from(Clients).where(eq(Clients.id, +clientId));
-
-
-    return new Response(JSON.stringify({
-      updatedClient
-    }), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' }
-    });
-
-  } catch (error) {
-
-    console.log(error);
-
-    return new Response(JSON.stringify({ msg: "No body found" }), {
+    return new Response(JSON.stringify({ msg: `Client ${clientId} not found` }), {
       status: 404,
       headers: { 'Content-Type': 'application/json' }
     });
   }
 
+
+  return new Response(JSON.stringify(
+    client.at(0)
+  ), {
+    status: 201,
+    headers: { 'Content-Type': 'application/json' }
+  });
+
 }
+
+
+
 
 
 export const PATCH: APIRoute = async ({ params, request }) => {
