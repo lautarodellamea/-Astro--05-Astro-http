@@ -1,4 +1,5 @@
-import { Clients, db } from 'astro:db';
+import { getCollection } from 'astro:content';
+import { Clients, db, Posts } from 'astro:db';
 
 // https://astro.build/db/seed
 export default async function seed() {
@@ -10,13 +11,24 @@ export default async function seed() {
     { name: 'Alice', age: 35, isActive: true },
     { name: 'Charlie', age: 45, isActive: false },
     { name: 'Eve', age: 30, isActive: true },
-
   ]);
 
 
+  // si quisieramos ejecutar el seed a produccion no seria posible porque esta instruccion de getCollection no funciona a la hora de ejecutar el seed 
+  const posts = await getCollection('blog');
+
+  await db.insert(Posts).values(
+    posts.map((post) => ({
+      id: post.id,
+      title: post.data.title,
+      likes: Math.round(Math.random() * 100),
+    }))
+  )
 
 
-  console.log("Seed ejecutado");
+
+
+  console.log("Seed executed");
 }
 
 // para plantar el seed en la base de datos remota
