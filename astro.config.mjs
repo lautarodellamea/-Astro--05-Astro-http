@@ -6,10 +6,12 @@ import sitemap from '@astrojs/sitemap';
 
 import cloudflare from "@astrojs/cloudflare";
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), db()],
   output: "hybrid"
   // en el modo hibrid, mantiene la generacion estatica por defecto a menos que le digamos que sean generado del lado del servidor
   // adapter: node({
@@ -17,6 +19,7 @@ export default defineConfig({
   // })
   ,
   adapter: cloudflare()
+
 });
 
 // https://docs.astro.build/en/guides/integrations-guide/node/
