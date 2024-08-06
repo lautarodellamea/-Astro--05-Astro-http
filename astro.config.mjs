@@ -19,7 +19,6 @@ export default defineConfig({
   //   mode: "standalone"
   // })
   ,
-
   adapter: cloudflare(),
   experimental: {
     actions: true,

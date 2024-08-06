@@ -71,7 +71,13 @@ const likePost = () => {
 
 const getCurrentLikes = async () => {
 
-  const { likes } = await actions.getPostLikes(props.postId);
+  console.log(props.postId)
+
+  const resp = await actions.getPostLikes(props.postId);
+  // console.log(resp.data.likes)
+
+  const { likes } = resp.data
+
 
   likeCount.value = likes;
   isLoading.value = false;

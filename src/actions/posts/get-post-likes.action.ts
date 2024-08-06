@@ -10,7 +10,9 @@ export const getPostLikes = defineAction({
 
     const posts = await db.select().from(Posts).where(eq(Posts.id, postId));
 
-    // console.log(posts.at(0)?.likes)
+
+
+    console.log(posts.at(0)?.likes)
 
     return {
       likes: posts.at(0)?.likes ?? 0,
