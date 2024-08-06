@@ -20,7 +20,10 @@ export default defineConfig({
   // })
   ,
 
-  adapter: cloudflare()
+  adapter: cloudflare(),
+  experimental: {
+    actions: true,
+  }
 });
 
 // https://docs.astro.build/en/guides/integrations-guide/node/
